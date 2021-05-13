@@ -2,6 +2,7 @@
  let hoursOpen = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: '];
 
 //====================================================================
+
 //create constrElemuctor to make our store object
 function CookieStand(location, minCustPerHour, maxCustPerHour, avgCookiePerSale){
     // create all dynamic properties
@@ -17,6 +18,7 @@ this.dailySalesTotals = 0;
   
  //=======================================================================
 
+//creating function to generate random num and push to empty array
  CookieStand.prototype.salesFigures = function(){
 
   for(let i=0; i<hoursOpen.length;i++){
@@ -48,7 +50,7 @@ Lima.salesFigures();
 
 //================================================================
 
-function makeCookieDiv(CookieStand){
+/* function makeCookieDiv(CookieStand){
 
   const div = document.getElementById('div');
 
@@ -60,7 +62,7 @@ function makeCookieDiv(CookieStand){
   const h2 = document.createElement('h2');
   h2.textContent = CookieStand.name;
   createArticle.appendChild(h2);
-}
+} */
 
 //==================================================================
 // create header row with hours
@@ -86,12 +88,12 @@ function addTableHeader() {
 }
 
 //=======================================================================
- function addTableBody(CookieStand){
-  const body = document.getElementById('table');
+ function addTableRow(CookieStand){
+  const table = document.getElementById('table');
   
     
     const trElem = document.createElement('tr');
-    body.appendChild(trElem);
+    table.appendChild(trElem);
 
     const locationTd = document.createElement('td');
     locationTd.textContent = CookieStand.location;
@@ -110,9 +112,17 @@ function addTableHeader() {
   
  //========================================================================
 
+
+
+
+
+
+
+
+
 addTableHeader();
-addTableBody(Seattle);
-addTableBody(Tokyo);
-addTableBody(Dubai);
-addTableBody(Paris);
-addTableBody(Lima);
+addTableRow(Seattle);
+addTableRow(Tokyo);
+addTableRow(Dubai);
+addTableRow(Paris);
+addTableRow(Lima);
