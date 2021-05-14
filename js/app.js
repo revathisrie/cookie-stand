@@ -1,9 +1,12 @@
-'use strElemict'
- let hoursOpen = ['6am: ','7am: ','8am: ','9am: ','10am: ','11am: ','12pm: ','1pm: ','2pm: ','3pm: ','4pm: ','5pm: ','6pm: ','7pm: '];
+'use strict'
+ let hoursOpen = ['6am ','7am ','8am ','9am ','10am ','11am ','12pm ','1pm ','2pm ','3pm ','4pm ','5pm ','6pm ','7pm '];
 
 //====================================================================
 
-//create constrElemuctor to make our store object
+
+let listCookieStands = [];
+
+//create constuctor to make our store object
 function CookieStand(location, minCustPerHour, maxCustPerHour, avgCookiePerSale){
     // create all dynamic properties
     this.location = location;
@@ -11,10 +14,12 @@ function CookieStand(location, minCustPerHour, maxCustPerHour, avgCookiePerSale)
     this.maxCustPerHour = maxCustPerHour;
     this.avgCookiePerSale = avgCookiePerSale;
     //empty array to push sales figures into
-this.cookieStandSales = [];
-//create day totals counter value
-this.dailySalesTotals = 0;
-    }
+    this.cookieStandSales = [];
+    //create day totals counter value
+    this.dailySalesTotals = 0;
+    listCookieStands.push(this);
+    this.salesFigures();
+  }
   
  //=======================================================================
 
@@ -26,11 +31,11 @@ this.dailySalesTotals = 0;
    let avgCookiePerHour = Math.random()*(this.maxCustPerHour - this.minCustPerHour) + this.minCustPerHour;
     avgCookiePerHour = Math.floor(avgCookiePerHour * this.avgCookiePerSale);
     
-    this.cookieStandSales.push(`${avgCookiePerHour}`);
+    this.cookieStandSales.push(avgCookiePerHour);
 
     this.dailySalesTotals = avgCookiePerHour + this.dailySalesTotals;
  }
-  console.log(this.cookieStandSales)
+  //console.log(this.cookieStandSales)
  }
 //============================================================================
 
@@ -41,41 +46,17 @@ let Dubai = new CookieStand("Dubai",11,38,2.3);
 let Paris = new CookieStand("Paris",20,38,2.3);
 let Lima = new CookieStand("Lima",2,16,4.6);
 
-
-Seattle.salesFigures();
-Tokyo.salesFigures();
-Dubai.salesFigures();
-Paris.salesFigures();
-Lima.salesFigures();
-
-//================================================================
-
-/* function makeCookieDiv(CookieStand){
-
-  const div = document.getElementById('div');
-
-  const createArticle = document.createElement('article');
-    let store = CookieStand.name;
-  createArticle.setAttrElemibute("id", store);
-
-  div.appendChild(createArticle);
-  const h2 = document.createElement('h2');
-  h2.textContent = CookieStand.name;
-  createArticle.appendChild(h2);
-} */
-
 //==================================================================
 // create header row with hours
 
 function addTableHeader() {
  
   const table = document.getElementById('table');
-
   const thElem = document.createElement('th');
   const trElem = document.createElement('tr');
 
   table.appendChild(trElem);
-  thElem.textContent = "Locations";
+  thElem.textContent = 'Locations';
   trElem.appendChild(thElem);
   for (let i = 0; i < hoursOpen.length; i++) {
     const th = document.createElement('th');
@@ -86,27 +67,33 @@ function addTableHeader() {
   th.textContent = 'Location Total';
   trElem.appendChild(th);
 }
-
-//=======================================================================
- function addTableRow(CookieStand){
-  const table = document.getElementById('table');
   
-    
+ //========================================================================
+
+
+ function addTableRow(rowName, hourlySales){
+    const table = document.getElementById('table');
     const trElem = document.createElement('tr');
+    trElem.setAttribute("id", rowName)
     table.appendChild(trElem);
+    let sumOfHourlyTotals = 0;
 
-    const locationTd = document.createElement('td');
-    locationTd.textContent = CookieStand.location;
+    // Adding first columen in the row which is typically rowName / location
+    const rowNameTd = document.createElement('td');
+    rowNameTd.textContent = rowName;
+    trElem.appendChild(rowNameTd);
 
-    trElem.appendChild(locationTd);
-    for (let j=0; j < CookieStand.cookieStandSales.length; j++ ){
-
+    // Adding hourly totals to the row.
+    for (let j=0; j < hourlySales.length; j++ ){
       const td = document.createElement('td');
-      td.textContent = CookieStand.cookieStandSales[j];
+      td.textContent = hourlySales[j];
       trElem.appendChild(td);
+      sumOfHourlyTotals = sumOfHourlyTotals + hourlySales[j];
     }
+
+    // Adding sum of hourly totals to the row.
     const td = document.createElement('td');
-    td.textContent = CookieStand.dailySalesTotals;
+    td.textContent = sumOfHourlyTotals;
     trElem.appendChild(td);
   }
   
@@ -114,15 +101,66 @@ function addTableHeader() {
 
 
 
-
-
-
-
-
-
 addTableHeader();
-addTableRow(Seattle);
-addTableRow(Tokyo);
-addTableRow(Dubai);
-addTableRow(Paris);
-addTableRow(Lima);
+addTableRow(Seattle.location, Seattle.cookieStandSales);
+addTableRow(Tokyo.location, Tokyo.cookieStandSales);
+addTableRow(Dubai.location, Dubai.cookieStandSales);
+addTableRow(Paris.location, Paris.cookieStandSales);
+addTableRow(Lima.location, Lima.cookieStandSales);
+
+addTableTotals(listCookieStands);
+
+
+//-------------------------------------------------------------------------------------//
+
+function removeRowByIdIfExists(id) {
+  // remove current totals
+  let hourlyTotalsRow = document.getElementById(id);
+  if(hourlyTotalsRow)
+    hourlyTotalsRow.parentNode.removeChild(hourlyTotalsRow);
+}
+
+function addTableTotals(arrayCookieStands){
+
+removeRowByIdIfExists("Hourly Totals");
+
+let hourlyTotals = []
+for(let i=0 ; i < hoursOpen.length; i++){
+  let hourlyTotal =0;
+  for(let j=0 ; j<arrayCookieStands.length; j++ ){
+    hourlyTotal = hourlyTotal + arrayCookieStands[j].cookieStandSales[i];
+  }
+  hourlyTotals.push(hourlyTotal);
+  console.log(hoursOpen[i] + " : " + hourlyTotal);
+}
+addTableRow("Hourly Totals", hourlyTotals);
+}
+//-------------------------------------------------------------------------------------//
+
+
+//event listeners call back function
+function addNewStore(event){
+  // prevents page from refreshing upon event
+  event.preventDefault();
+
+  //assigning new value to property assigned to current property; (target) is the form; minCustPerHour is set in HTML input tag;
+  var newMinCustPerHour = event.target.minCustPerHour.value;
+  var newMaxCustPerHour = event.target.maxCustPerHour.value;
+  var newAvgCookiePerSale = event.target.avgCookiePerSale.value;
+  var newLocation = event.target.location.value;
+  
+  console.log(newMinCustPerHour);
+  console.log(newMaxCustPerHour);
+  console.log(newAvgCookiePerSale);
+  console.log(newLocation);
+
+
+  // make new instance by passing in new arguements
+ let newStore = new CookieStand(newLocation, newMinCustPerHour, newMaxCustPerHour, newAvgCookiePerSale);
+ addTableRow(newStore.location, newStore.cookieStandSales);
+ addTableTotals(listCookieStands);
+}
+
+//add event listener, listening for event, put at bottom for code readability
+storeForm.addEventListener('submit', addNewStore);
+

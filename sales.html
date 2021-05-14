@@ -3,28 +3,38 @@
 
 <head>
 
-  <title>title</title>
-  <link rel="stylesheet" href="../css/reset.css" type="text/css">
-  <link rel="stylesheet" href="../css/style.css" type="text/css">
+  <title>Salmon Cookie Sales Breakdown</title>
+  <link rel="stylesheet" href="/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
 <body>
+  <!-- <button>
+    <a href="index.html">Home</a>
+</button> -->
+  <table id="table"></table>
+  <form id="storeForm">
+    <fieldset>
+      <legend>Add a New Store</legend>
 
-  <table id="table">
+          <label for="location">Location</label> 
+          <input type="text" name="location" id="salesFigures">
+      
+          <label for="minCustPerHour">Min Cust Per Hour</label>
+          <input type="number" name="minCustPerHour" id="salesFigures">
+        
+          <label for="maxCustPerHour">Max Cust Per Hour</label>
+          <input type="number" name="maxCustPerHour" id="salesFigures">
+       
+          <label for="avgCookiePerSale">Avg Cookie Per Sale</label>
+          <input type="number" name="avgCookiePerSale" id="salesFigures">
+        
+          <button>Add Store</button>
+    </fieldset>
+  </form>
 
-    
-  </table>
-
-
-
-  <div id="div">
-
-
-  </div>
-
+  <div id="div"> </div>
 
   <script src="/js/app.js"></script>
-
 </body>
-
 </html>

@@ -1,0 +1,79 @@
+body{
+    overflow: scroll;
+  }
+  /* Sales figures table */
+  #salesPageImg{
+    background-attachment: fixed;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+  
+  table#cookies{
+    width: 95%;
+    border: 3px solid black;
+    background: white; 
+    margin: 2% auto;
+  }
+  
+  table#cookies tr:nth-child(odd){
+    background: #f5f5f5;
+  }
+  
+  table#cookies tr:not(:first-child):hover {
+    background: #000;
+    color: #fff;
+  }
+  
+  table#cookies th{
+    border: 2px solid #ccc;
+    height: 35px;
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+  
+  table#cookies td{
+    border: 1px solid #ccc;
+    padding: .5rem 1.5rem;
+  }
+  
+  form#storeForm{
+    background: white;
+    border: 3px solid salmon;
+    color: black;
+    font-family: 'Crete Round', serif;
+    margin: 2% 40%;
+    width: 300px;
+  }
+  
+  input#salesFigures{
+    height: 30px;
+    max-width: 100px;
+  }
+  
+  fieldset li{
+    float: right;
+    margin: 15px;
+  }
+  
+  legend{
+    font-size: 25px;
+    text-align: center;
+  }
+  
+  button {
+    background-color: #000;
+    border: none;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  button:hover{
+    background-color: salmon;
+    transition-duration: 0.35s;
+  }
