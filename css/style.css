@@ -1,43 +1,84 @@
 body {
-  width: 90%;
+  background-color: rgb(202, 220, 226);
+  width: 80%;
   margin: 0 auto;
 }
-#header, #nav, footer{
-background-color: slategray;
-border: thin;
+#header, #footerid{
+background-color: rgb(172, 207, 186);
+/* border:thick; */
 }
+#footerid{
+margin: 5px;
+padding: 5px;
+text-align: center;
+}
+
 #headerimg{
 display: flex;
 width: 30%;
 }
 
-section .image{
-display:flex;
-width: 20%;
-margin: 20px;
-padding: 10px;
-float: left;
 
+.images {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
+}
+ .image {
+  display:flex;
+  width: 32%;
+  border-radius: 5px;
+  padding:5px;
 }
 
+div h4 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: 'Itim', Arial, sans-serif ;
+}
+h2 {
+  text-align: center;
+  font-size: 2.5em;
+  font-family: 'Itim', Arial, sans-serif ;
+}
+
+#location{
+  width: 100px;
+  height: 100px;
+   float: right;
+   color: rgb(96, 133, 202);
+}
+#familyimg{
+  width: 60%;
+  height: 60%;
+}
+.two-column {
+  display: flex;
+  margin-top: 30px;
+  gap: 30px;
+  height:  400px;
+}
+
+.two-column section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.two-column section h2 {
+  font-size: larger;
+}
+.two-column section p {
+  overflow-y: scroll;
+}
 h1{
   font-style: italic;
   font-size: 40px;
   color: salmon;
+  text-align: center;
+  margin-top: 20px;
+}
 
-}
-h2{
-  font-style:normal ;
-  font-size: 40px;
-  
-
-}
-li{
-  width: 20%;
-   float: left; 
-   font-size: 20px;
-  /* margin: 10%; */
-}
 th {
   margin: 20px;
   padding: 20px;
@@ -53,9 +94,9 @@ td{
 
 fieldset {
   border: 5px solid rgb(211, 170, 153);
-  padding: 5px;
+  padding: 20px;
   margin-bottom: 10px;
-  /* float: right; */
+  float: right;
   margin: 15px;
 }
 
@@ -66,22 +107,21 @@ legend {
 }
 
 input[type=text] {
-  width: 40%;
-  /* margin-right: 5px; */
-  margin: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius:10px;
-  
+  width: 20%;
+  margin-right: 100px;
+  border-radius: 4px;
 }
 
 input[type=number] {
-  width: 40%;
-  /* margin-right: 5px; */
-  margin: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  border-radius:10px;
+  width: 20%;
+  margin-right: 100px;
+  border-radius: 4px;
+}
+#salesFigures{
+  display:flex;
+  margin-left:auto;
+  flex-direction: column;
+  
 }
 
 button {

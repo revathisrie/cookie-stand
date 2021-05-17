@@ -133,7 +133,7 @@ for(let i=0 ; i < hoursOpen.length; i++){
   hourlyTotals.push(hourlyTotal);
   console.log(hoursOpen[i] + " : " + hourlyTotal);
 }
-addTableRow("Hourly Totals", hourlyTotals);
+  addTableRow("Hourly Totals", hourlyTotals);
 }
 //-------------------------------------------------------------------------------------//
 
